@@ -34,6 +34,7 @@ class MarioNet(nn.Module):
             p.requires_grad = False
 
     def forward(self, input, model):
+        print(input.shape)
         if model == 'online':
             return self.online(input)
         elif model == 'target':

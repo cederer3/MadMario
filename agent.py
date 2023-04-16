@@ -54,7 +54,7 @@ class Mario:
 
         # EXPLOIT
         else:
-            state = torch.FloatTensor(state).cuda() if self.use_cuda else torch.FloatTensor(state)
+            state = torch.FloatTensor(state[0]).cuda() if self.use_cuda else torch.FloatTensor(state[0])
             state = state.unsqueeze(0)
             action_values = self.net(state, model='online')
             action_idx = torch.argmax(action_values, axis=1).item()
@@ -78,8 +78,8 @@ class Mario:
         reward (float),
         done(bool))
         """
-        state = torch.FloatTensor(state).cuda() if self.use_cuda else torch.FloatTensor(state)
-        next_state = torch.FloatTensor(next_state).cuda() if self.use_cuda else torch.FloatTensor(next_state)
+        state = torch.FloatTensor(state[0]).cuda() if self.use_cuda else torch.FloatTensor(state[0])
+        next_state = torch.FloatTensor(next_state[0]).cuda() if self.use_cuda else torch.FloatTensor(next_state[0])
         action = torch.LongTensor([action]).cuda() if self.use_cuda else torch.LongTensor([action])
         reward = torch.DoubleTensor([reward]).cuda() if self.use_cuda else torch.DoubleTensor([reward])
         done = torch.BoolTensor([done]).cuda() if self.use_cuda else torch.BoolTensor([done])

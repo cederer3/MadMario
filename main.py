@@ -14,8 +14,11 @@ from agent import Mario
 from wrappers import ResizeObservation, SkipFrame
 
 # Initialize Super Mario environment
-env = gym_super_mario_bros.make('SuperMarioBros-1-1-v0')
-
+# if gym.__version__ < '0.26':
+#     env = gym_super_mario_bros.make("SuperMarioBros-1-1-v3", new_step_api=True)
+# else:
+#     env = gym_super_mario_bros.make("SuperMarioBros-1-1-v3", render_mode='rgb', apply_api_compatibility=True)
+env = gym_super_mario_bros.make("SuperMarioBros-1-1-v3", render_mode='human', apply_api_compatibility=True)
 # Limit the action-space to
 #   0. walk right
 #   1. jump right
@@ -75,6 +78,7 @@ for e in range(episodes):
 
         # 10. Check if end of game
         if done or info['flag_get']:
+            # env.reset()
             break
 
     logger.log_episode()
